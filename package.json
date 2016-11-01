@@ -1,0 +1,25 @@
+{
+  "name": "bit-docs-docjs-theme",
+  "version": "0.0.1",
+  "description": "Old school DocumentJS theme",
+  "main": "static/docjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bit-docs/bit-docs-docjs-theme.git"
+  },
+  "keywords": [
+    "bit-docs"
+  ],
+  "author": "Bitovi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bit-docs/bit-docs-docjs-theme/issues"
+  },
+  "homepage": "https://github.com/bit-docs/bit-docs-docjs-theme#readme",
+  "devDependencies": {
+    "bit-docs-generate-html": "^0.3.3"
+  }
+}
