@@ -1,4 +1,7 @@
+var makeDocMapInfo = require("./doc-map-info");
+
 module.exports = function(docMap, config, getCurrent, oldHelpers, OtherHandlebars){
+	var docMapInfo = makeDocMapInfo(docMap);
 
 	var lastPartOfName = function(str){
 		var lastIndex = Math.max( str.lastIndexOf("/"), str.lastIndexOf(".") );
@@ -78,6 +81,11 @@ module.exports = function(docMap, config, getCurrent, oldHelpers, OtherHandlebar
 
 	// GENERIC HELPERS
 	var helpers = {
+		makeChildrenContext: function(docObject) {
+			var children = docMapInfo.getChildren(docObject) || [];
+			return { children: children };
+		},
+
 		/**
 		 * @function documentjs.generators.html.defaultHelpers.ifEqual
 		 */
@@ -148,35 +156,38 @@ module.exports = function(docMap, config, getCurrent, oldHelpers, OtherHandlebar
 		 */
 		generatedWarning: function(){
 			var current = getCurrent();
-			return "<!--####################################################################\n" +
-				"\tTHIS IS A GENERATED FILE -- ANY CHANGES MADE WILL BE OVERWRITTEN\n\n" +
-					'\tINSTEAD CHANGE:\n' +
-						"\tsource: " + current.src +
-							(current.type ? '\n\t@' + current.type + " " + current.name : '') +
-								"\n######################################################################## -->";
+
+			return (
+				"<!--####################################################################\n" +
+					"\tTHIS IS A GENERATED FILE -- ANY CHANGES MADE WILL BE OVERWRITTEN\n\n" +
+					"\tINSTEAD CHANGE:\n" +
+					"\tsource: " + current.src + (current.type ? '\n\t@' + current.type + " " + current.name : '') +
+				"\n######################################################################## -->"
+			);
 		},
 
 		getParentsPathToSelf: function(name){
 			var names = {};
 
 			// walk up parents until you don't have a parent
-			var parent = docMap[name],
-				parents = [];
+			var parent = docMap[name];
+			var parents = [];
 
-				// don't allow things that are their own parent
-				if(parent.parent === name){
+			// don't allow things that are their own parent
+			if (parent.parent === name){
+				return parents;
+			}
+
+			while(parent){
+				parents.unshift(parent);
+				if (names[parent.name]){
 					return parents;
 				}
+				names[parent.name] = true;
+				parent = docMap[parent.parent];
+			}
 
-				while(parent){
-					parents.unshift(parent);
-					if(names[parent.name]){
-						return parents;
-					}
-					names[parent.name] = true;
-					parent = docMap[parent.parent];
-				}
-				return parents;
+			return parents;
 		},
 		/**
 		 * @function documentjs.generators.html.defaultHelpers.makeTitle
@@ -420,23 +431,27 @@ module.exports = function(docMap, config, getCurrent, oldHelpers, OtherHandlebar
 		 * where `parents` is each parent docObject of the `current` docObject and
 		 * `active` is the first docObject of current that has children.
 		 */
-		getActiveAndParents: function(options){
+		getActiveAndParents: function(options) {
 			var parents = helpers.getParentsPathToSelf(getCurrent().name);
 			var	active = parents.pop();
 
-			if(!active){
+			if (active) {
+				var children = docMapInfo.getChildren(active) || [];
+
+				if (!children.length && parents.length) {
+					// we want to show this item along-side its siblings
+					// make its parent active
+					active = parents.pop();
+
+					// if the original active was in a group, prototype, etc, move up again
+					if (parents.length && /group|prototype|static/i.test(active.type)) {
+						active = parents.pop();
+					}
+				}
+			} else {
 				// there are no parents, possibly nothing active
 				parents = [];
 				active = docMap[config.parent];
-			} else if(!active.children && parents.length){
-				// we want to show this item along-side it's siblings
-				// make it's parent active
-				active = parents.pop();
-
-				// if the original active was in a group, prototype, etc, move up again
-				if(parents.length && /group|prototype|static/i.test( active.type) ){
-					active = parents.pop();
-				}
 			}
 
 			// remove groups because we don't want them showing up
@@ -445,13 +460,12 @@ module.exports = function(docMap, config, getCurrent, oldHelpers, OtherHandlebar
 			});
 
 			// Make sure root is always here
-			if(active.name !== config.parent && (!parents.length || parents[0].name !== config.parent)  ){
+			if (active.name !== config.parent &&
+				(!parents.length || parents[0].name !== config.parent)) {
 				parents.unshift(docMap[config.parent]);
 			}
-			return options.fn({
-				parents: parents,
-				active: active
-			});
+
+			return options.fn({ parents: parents, active: active });
 		},
 		/**
 		 * @function documentjs.generators.html.defaultHelpers.eachFirstLevelChildren
@@ -470,7 +484,7 @@ module.exports = function(docMap, config, getCurrent, oldHelpers, OtherHandlebar
 		 *
 		 * Goes through each `children` in the sorted order.
 		 */
-		eachOrderedChildren: function(children, options){
+		eachOrderedChildren: function(children, options) {
 			children = (children || []).slice(0).sort(sortChildren);
 			var res = "";
 			children.forEach(function(child){
