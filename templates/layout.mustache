@@ -13,30 +13,51 @@
 <!--[if IE 9]>
 <html class="no-js ie ie9" lang="en">
 <![endif]-->
-<!--[if gt IE 9]><!-->
+<!--[if gt IE 9]>
 <html class="no-js" lang="en">
-<!--<![endif]-->
+<![endif]-->
 <head>
 	<meta charset="utf-8">
 	<title>{{makeParentTitle}} {{#if title}}- {{title}} {{else}} {{#if name}}- {{name}}{{/if}}{{/if}}</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
-	{{^devBuild}}
-	<link rel="stylesheet" type="text/css" href="{{pathToDest}}/static/bundles/bit-docs-site/static.css">
-	{{/devBuild}}
+	{{#unless devBuild}}
+		<link rel="stylesheet" type="text/css" href="{{pathToDest}}/static/bundles/bit-docs-site/static.css">
+	{{/unless}}
 	<!--[if lt IE 9]>
-   <script type="text/javascript" src="static/html5shiv.js"></script>
-    <!--<![endif]-->
+		<script type="text/javascript" src="static/html5shiv.js"></script>
+	<![endif]-->
 </head>
 
 <body class="docs">
 	{{#unless hideHeader}}
 	<header>
 		<nav class="container">
-
 			<div class="logo-menu">
 				<a class="brand" href="./index.html">{{makeParentTitle}}</a>
+
+				<ul class="dropdown-menu">
+					<li><a href="https://donejs.com/">DoneJS</a></li>
+					<li><a href="http://stealjs.com/">StealJS</a></li>
+					<li><a href="http://jquerypp.com/">jQuery ++</a></li>
+					<li><a href="https://funcunit.com/">FuncUnit</a></li>
+					<li><a href="http://documentjs.com/">DocumentJS</a></li>
+				</ul>
 			</div>
+
+			<ul class="nav">
+				<li><a href="http://stealjs.com">Home</a></li>
+
+				{{#ifEqual page "index"}}
+          <li><a href="{{urlTo 'index'}}">Api</a></li>
+        {{else}}
+          <li class="active"><a href="{{urlTo 'index'}}">Api</a></li>
+        {{/ifEqual}}
+
+				<li><a href="https://twitter.com/stealjs">Twitter</a></li>
+				<li><a href="https://github.com/stealjs/steal">GitHub</a></li>
+				<li><a href="https://gitter.im/stealjs/steal">Chat</a></li>
+			</ul>
 
 			<div class="pull-right">
 				<div class="bitovi-menu">

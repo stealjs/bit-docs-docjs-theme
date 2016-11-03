@@ -345,28 +345,6 @@ module.exports = function(docMap, config, getCurrent, oldHelpers, OtherHandlebar
 			}
 		},
 
-		// stuff for creating urls
-		ifCurrentFrom: function(url, options){
-
-			var name = docsFilename(getCurrent().name, config);
-			var dir = path.dirname( getCurrent().docConfigDest );
-			var loc = path.join(dir, name);
-
-			if( loc === url ) {
-				return options.fn(this);
-			} else {
-				return options.inverse(this);
-			}
-		},
-		/**
-		 * @function documentjs.generators.html.defaultHelpers.urlFromConfig
-		 *
-		 * Returns a url that is joined from the most parent `documentjs.json`.
-		 */
-		urlFromConfig: function (url) {
-			var dir = path.dirname( getCurrent().docConfigDest );
-			return path.join(dir,url);
-		},
 		/**
 		 * @function documentjs.generators.html.defaultHelpers.urlTest
 		 *
