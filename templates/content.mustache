@@ -13,22 +13,23 @@
 		{{> menu.mustache}}
 	</nav>
 	{{/unless}}
-	
+
 	{{#unless hideArticle}}
 	<article class="content docs">
 	{{/unless}}
-	
+
 		{{#unless hideTitle}}
 		<section class="title">
 			{{> title.mustache}}
 		</section>
 		{{/unless}}
-		
+
 		{{#unless hideArticle}}
 		<section class="contents">
+			<div class="on-this-page-container"></div>
 		</section>
 		{{/unless}}
-		
+
 		{{#if deprecated.length}}
 			<section class='warnings'>
 				{{#deprecated}}
@@ -61,13 +62,13 @@
 			</section>
 			{{/if}}
 		{{/if}}
-		
+
 		{{#ifAny params returns}}
 			<section class="signature">
 				{{> signature.mustache}}
 			</section>
 		{{/ifAny}}
-		
+
 
 		{{#if body}}
 		<section class="comment">
@@ -83,7 +84,7 @@
 				<section class="comment">
 					<h2>{{title}}</h2>
 				</section>
-				
+
 				{{#if description}}
 				<section class="description">
 					{{{chain "makeHtml" "makeLinks" description}}}
@@ -106,11 +107,11 @@
 			{{{makeApiSection}}}
 		</section>
 		{{/if}}
-	
+
 	{{#unless hideArticle}}
 	</article>
 	{{/unless}}
-	
+
 {{#unless hideContainer}}
 </div>
 {{/unless}}

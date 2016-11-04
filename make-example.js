@@ -4,24 +4,29 @@ var fs = require("fs");
 var readFile = Q.denodeify(fs.readFile);
 var path = require("path");
 
-var docMap = readFile(__dirname+"/docMap.json").then(function(source){
-    return JSON.parse(""+source);
+var docMap = readFile(path.join(__dirname, "docMap.json"))
+.then(function(source) {
+	return JSON.parse(""+source);
 });
 
 var forceBuild = process.argv.indexOf("-f") !== -1;
 
-generate(docMap,{
-    html: {
-        templates: path.join(__dirname, "templates"),
-        dependencies: {
-            "bit-docs-docjs-theme": __dirname,
-            "bit-docs-prettify": "^0.1.0",
-			"bit-docs-html-highlight-line": "^0.2.2"
-        }
-    },
-    dest: path.join(__dirname, "temp"),
-    parent: "StealJS",
-    forceBuild: forceBuild,
+generate(docMap, {
+	html: {
+		templates: path.join(__dirname, "templates"),
+		dependencies: {
+			"bit-docs-docjs-theme": __dirname,
+			"bit-docs-prettify": "^0.1.0",
+			"bit-docs-html-highlight-line": "^0.2.2",
+			"bit-docs-html-toc": "^0.2.1"
+		}
+	},
+	dest: path.join(__dirname, "temp"),
+	parent: "StealJS",
+	forceBuild: forceBuild,
 	minifyBuild: false,
-    debug: true
-}).done();
+	debug: true
+})
+.catch(function(error) {
+	console.error(error);
+});
