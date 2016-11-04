@@ -32,6 +32,8 @@
 <body class="docs">
 	{{#unless hideHeader}}
 	<header>
+		{{! workaround for https://github.com/bit-docs/bit-docs-html-toc/issues/2 }}
+		<div style="display: none;" class="navbar"></div>
 		<nav class="container">
 			<div class="logo-menu">
 				<a class="brand" href="./index.html">{{makeParentTitle}}</a>
