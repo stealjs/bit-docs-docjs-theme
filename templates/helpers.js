@@ -79,6 +79,16 @@ module.exports = function(docMap, config, getCurrent, oldHelpers, OtherHandlebar
 		}
 	};
 
+	function getSourceFilePath(docObject) {
+		var source = docObject.src;
+
+		if (typeof source === "string") {
+			return source;
+		} else {
+			return source ? source.path : "";
+		}
+	}
+
 	// GENERIC HELPERS
 	var helpers = {
 		makeChildrenContext: function(docObject) {
@@ -156,12 +166,14 @@ module.exports = function(docMap, config, getCurrent, oldHelpers, OtherHandlebar
 		 */
 		generatedWarning: function(){
 			var current = getCurrent();
+			var source = getSourceFilePath(current);
 
 			return (
 				"<!--####################################################################\n" +
 					"\tTHIS IS A GENERATED FILE -- ANY CHANGES MADE WILL BE OVERWRITTEN\n\n" +
 					"\tINSTEAD CHANGE:\n" +
-					"\tsource: " + current.src + (current.type ? '\n\t@' + current.type + " " + current.name : '') +
+					"\tsource: " + source +
+					(current.type ? "\n\t@" + current.type + " " + current.name : "") +
 				"\n######################################################################## -->"
 			);
 		},
