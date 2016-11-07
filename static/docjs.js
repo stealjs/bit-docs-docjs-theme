@@ -3,12 +3,19 @@ var $ = require("jquery");
 require("./styles/styles.less");
 
 $(function() {
+	var headings = {};
+
 	collectHeadings().each(function() {
 		var $el = $(this);
 		var id = $el.attr("id");
 
 		if (!id) {
-			id = "section_" + $el.text().replace(/\s/g, "").replace(/[^\w]/g, "_");
+			id = makeAnchorHeadingId($el.text());
+			var count = headings[id] || 0;
+
+			id += (count > 0) ? "-" + count : "";
+			headings[id] = count + 1;
+
 			$el.attr("id", id);
 		}
 
@@ -17,6 +24,13 @@ $(function() {
 
 	function collectHeadings() {
 		return $(".content .comment h2, .content .comment h3");
+	}
+
+	function makeAnchorHeadingId(anchorText) {
+		return (anchorText || "")
+		.replace(/\s/g, "-")       // replace spaces with dashes
+		.replace(/[^\w\-]/g, "")   // remove punctuation
+		.toLowerCase();
 	}
 
 	function anchorTemplate(ctx) {
