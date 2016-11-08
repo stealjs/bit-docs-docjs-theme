@@ -26,7 +26,7 @@
   "homepage": "https://github.com/bit-docs/bit-docs-docjs-theme#readme",
   "devDependencies": {
     "bit-docs-generate-html": "^0.3.3",
-    "bit-docs-html-toc": "^0.2.1"
+    "bit-docs-html-toc": "^0.4.0"
   },
   "dependencies": {
     "jquery": "^3.1.1"

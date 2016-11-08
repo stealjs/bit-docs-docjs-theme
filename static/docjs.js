@@ -22,6 +22,15 @@ $(function() {
 		$el.prepend(anchorTemplate({ id: id }));
 	});
 
+	if (window.location.hash.length) {
+		var id = window.location.hash.replace("#", "");
+		var anchor = document.getElementById(id);
+
+		if (anchor) {
+			anchor.scrollIntoView(true);
+		}
+	}
+
 	function collectHeadings() {
 		return $(".content .comment h2, .content .comment h3");
 	}
