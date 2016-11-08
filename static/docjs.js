@@ -4,17 +4,26 @@ require("./styles/styles.less");
 
 $(function() {
 	var headings = {};
+	var collected = collectHeadings();
 
-	collectHeadings().each(function() {
+	collected.each(function() {
+		var $el = $(this);
+		var id = $el.attr("id");
+
+		if (id) headings[id] = true;
+	});
+
+
+	collected.each(function() {
 		var $el = $(this);
 		var id = $el.attr("id");
 
 		if (!id) {
 			id = makeAnchorHeadingId($el.text());
-			var count = headings[id] || 0;
+			var token = getUniqueToken(id, headings);
 
-			id += (count > 0) ? "-" + count : "";
-			headings[id] = count + 1;
+			id += (token > 0) ? "-" + token : "";
+			headings[id] = true;
 
 			$el.attr("id", id);
 		}
@@ -29,6 +38,18 @@ $(function() {
 		if (anchor) {
 			anchor.scrollIntoView(true);
 		}
+	}
+
+	function getUniqueToken(id, headings) {
+		var token = 0;
+		var uniq = id;
+
+		while (headings[uniq]) {
+			token += 1;
+			uniq = id + "-" + token;
+		}
+
+		return token;
 	}
 
 	function collectHeadings() {
