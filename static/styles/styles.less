@@ -36,13 +36,28 @@ b, strong {
 	font-weight: bold;
 }
 
-h2 .anchor,
-h3 .anchor {
-	visibility: hidden;
-	margin-right: 5px;
-}
-
-h3:hover .anchor,
-h2:hover .anchor {
-	visibility: visible;
+h2,
+h3 {
+	.anchor {
+		margin-right: 10px;
+		svg {
+			transform: scale(1);
+			transition: all 0.15s ease-in-out;
+			fill: @brand-color-1;
+		}
+	}
+	&:hover,
+	&:focus {
+		.anchor {
+			svg {
+				transform: scale(1.2);
+				fill: @brand-color-8;
+			}
+			&:active {
+				svg {
+					transform: scale(0.9);
+				}
+			}
+		}
+	}
 }
