@@ -201,6 +201,11 @@ module.exports = function(docMap, config, getCurrent, oldHelpers, OtherHandlebar
 
 			return parents;
 		},
+
+		googleAnalyticsTrackingCode: function() {
+			return config.googleAnalyticsTrackingCode;
+		},
+
 		/**
 		 * @function documentjs.generators.html.defaultHelpers.makeTitle
 		 * Given the docObject context, returns a "pretty" name that is used

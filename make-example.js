@@ -23,6 +23,7 @@ generate(docMap, {
 	},
 	dest: path.join(__dirname, "temp"),
 	parent: "StealJS",
+	googleAnalyticsTrackingCode: 'UA-2302003-20',
 	forceBuild: forceBuild,
 	minifyBuild: false,
 	debug: true
