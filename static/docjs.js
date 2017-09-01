@@ -1,6 +1,7 @@
 var $ = require("jquery");
 
 require("./styles/styles.less");
+require("./styles/github-v2.css");
 
 $(function() {
 	var headings = {};
