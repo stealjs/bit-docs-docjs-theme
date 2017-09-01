@@ -1,7 +1,7 @@
 {
-  "name": "bit-docs-docjs-theme",
-  "version": "0.4.0",
-  "description": "Old school DocumentJS theme",
+  "name": "bit-docs-stealjs-theme",
+  "version": "0.5.0",
+  "description": "bit-docs theme for stealjs.com",
   "main": "static/docjs",
   "scripts": {
     "test": "echo \"testing\"",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bit-docs/bit-docs-docjs-theme.git"
+    "url": "git+https://github.com/stealjs/bit-docs-stealjs-theme.git"
   },
   "keywords": [
     "bit-docs"
@@ -21,9 +21,9 @@
   "author": "Bitovi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bit-docs/bit-docs-docjs-theme/issues"
+    "url": "https://github.com/stealjs/bit-docs-stealjs-theme/issues"
   },
-  "homepage": "https://github.com/bit-docs/bit-docs-docjs-theme#readme",
+  "homepage": "https://github.com/stealjs/bit-docs-stealjs-theme#readme",
   "devDependencies": {
     "bit-docs-generate-html": "^0.3.3",
     "bit-docs-html-toc": "^0.5.0"
