@@ -24,6 +24,30 @@ pre {
   	line-height: 16px;
   	letter-spacing: 0px;
   	background-color: rgba(0,0,0,0);
+
+		.expand {
+			background-color: @gray-lighter;
+			text-align: center;
+			padding: 4px 0px;
+			// negative margin to break parent padding
+			margin: @grid-gutter-width/4 -20px;
+			border-top: 1px solid @haze;
+			border-bottom: 1px solid @haze;
+			color: black;
+		}
+
+		.expand:before {
+			content: url(../img/expand_icon.svg);
+			display: block;
+			width: 15px;
+			height: 15px;
+			margin: 0 auto;
+		}
+
+		.expand:hover {
+			opacity: .6;
+			cursor: pointer;
+		}
   }
 
   ol {

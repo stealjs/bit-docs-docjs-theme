@@ -16,7 +16,7 @@ generate(docMap, {
 		templates: path.join(__dirname, "templates"),
 		dependencies: {
 			"bit-docs-prettify": "^0.1.0",
-			"bit-docs-docjs-theme": __dirname,
+			"bit-docs-stealjs-theme": __dirname,
 			"bit-docs-html-highlight-line": "^0.2.2",
 			"bit-docs-html-toc": "^0.4.0"
 		}
