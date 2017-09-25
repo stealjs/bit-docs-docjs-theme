@@ -29,6 +29,7 @@
     "bit-docs-html-toc": "^0.5.0"
   },
   "dependencies": {
+    "donejs-survey-ad": "^0.1.1",
     "jquery": "^3.1.1"
   }
 }

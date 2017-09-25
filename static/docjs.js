@@ -1,4 +1,5 @@
 var $ = require("jquery");
+var SurveyAdControl = require("donejs-survey-ad");
 
 require("./styles/styles.less");
 require("./styles/github-v2.css");
@@ -75,4 +76,13 @@ $(function() {
 			'</a>'
 		);
 	}
+
+	// Set up the survey ad control
+	var footerElement = document.body.querySelector('footer');
+	var surveyAdControl = new SurveyAdControl("survey-ad", {
+		addShowingClassToElement: footerElement
+	});
+	// Notify the survey ad control that the user loaded a page
+	surveyAdControl.didEngage();
+
 });
