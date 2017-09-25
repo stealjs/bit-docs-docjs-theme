@@ -9,7 +9,7 @@ header {
 	color: #fff;
 	position: relative;
 	z-index: 2;
-	
+
 	.container {
 		position: relative;
 		height: @headerHeight;
@@ -27,7 +27,7 @@ header {
 		display: inline-block;
 		line-height: @headerHeight;
 		position: relative;
-		
+
 		> a {
 			text-transform: uppercase;
 			text-decoration: none;
@@ -58,7 +58,7 @@ header {
 			border-bottom-style: none;
 		}
 	}
-	
+
 	.nav > li:hover > a {
 		background-color: rgba(0, 0, 0, 0.1);
 		border: 1px solid rgba(0, 0, 0, 0.3);
@@ -79,7 +79,7 @@ header {
 		text-align: center;
 		width: 50px;
 		height: 54px;
-		
+
 		&:before {
 			/*
 			right: 4px;
@@ -115,7 +115,7 @@ header {
 		list-style-type: none;
 		top: @headerHeight;
 		width: 240px;
-		
+
 		li a {
 			display: block;
 			text-decoration: none;
@@ -165,15 +165,20 @@ footer {
 	padding-bottom: 0px;
 	position: relative;
 	text-align: right;
+	transition: padding-bottom .25s ease;
 	height:  @footerHeight;
-	
+
+	&.survey-ad-showing {
+		padding-bottom: 3rem;
+	}
+
 	.container {
 		text-align: right;
 		position: relative;
 		height:  @footerHeight;
 		overflow: hidden;
 	}
-	
+
 	li a {
 		font-size: 12px;
 		font-weight: bold;
