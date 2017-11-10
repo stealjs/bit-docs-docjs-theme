@@ -30,6 +30,7 @@ $(function() {
 		}
 
 		$el.prepend(anchorTemplate({ id: id }));
+		$el.addClass('anchored-heading');
 	});
 
 	if (window.location.hash.length) {
