@@ -1,6 +1,6 @@
 {
   "name": "bit-docs-stealjs-theme",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "bit-docs theme for stealjs.com",
   "main": "static/docjs",
   "scripts": {
