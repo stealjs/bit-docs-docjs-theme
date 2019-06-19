@@ -1,4 +1,5 @@
 var makeDocMapInfo = require("./doc-map-info");
+var unescapeHTML = require("unescape-html");
 
 module.exports = function(docMap, config, getCurrent, oldHelpers, OtherHandlebars){
 	var docMapInfo = makeDocMapInfo(docMap);
@@ -690,6 +691,11 @@ module.exports = function(docMap, config, getCurrent, oldHelpers, OtherHandlebar
 		makeParentTitle: function(){
 			var root = docMap[config.parent];
 			return root.title || root.name;
+		},
+		getLinkTitle: function(docObject) {
+			var description = docObject.description || docObject.name;
+			description = oldHelpers.stripMarkdown(description);
+			return unescapeHTML(description).replace(/\n/g, " ").trim();
 		}
 	};
 

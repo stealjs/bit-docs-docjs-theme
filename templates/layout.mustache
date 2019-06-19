@@ -19,8 +19,28 @@
 <head>
 	<meta charset="utf-8">
 	<title>{{makeParentTitle}} {{#if title}}- {{title}} {{else}} {{#if name}}- {{name}}{{/if}}{{/if}}</title>
-	<meta name="description" content="">
+	<meta name="description" content="{{getLinkTitle .}}">
 	<meta name="author" content="">
+	<meta property="og:title" content="{{makeParentTitle}} {{#if title}}- {{title}} {{else}} {{#if name}}- {{name}}{{/if}}{{/if}}">
+	<meta property="og:description" content="{{getLinkTitle .}}">
+	<meta property="og:image" content="https://www.bitovi.com/hs-fs/hubfs/open-source/os-stealjs.png">
+	<script type="application/ld+json">
+		{
+			"@context": "http://www.schema.org",
+			"@type": "SoftwareSourceCode",
+			"applicationCategory": "DeveloperApplication",
+			"brand": "Bitovi",
+			"category": "JavaScript Frameworks",
+			"codeRepository": "https://github.com/stealjs/steal",
+			"description": "{{getLinkTitle .}}",
+			"image": "https://www.bitovi.com/hs-fs/hubfs/open-source/os-stealjs.png",
+			"license": "https://github.com/stealjs/steal/blob/master/license.md",
+			"logo": "https://www.bitovi.com/hs-fs/hubfs/open-source/os-stealjs.png",
+			"name": "{{makeParentTitle}} {{#if title}}- {{title}} {{else}} {{#if name}}- {{name}}{{/if}}{{/if}}",
+			"programmingLanguage": "JavaScript",
+			"softwareVersion" : "2.2.1"
+		}
+	</script>
 	{{#unless devBuild}}
 		<link rel="stylesheet" type="text/css" href="{{pathToDest}}/static/bundles/bit-docs-site/static.css">
 	{{/unless}}
